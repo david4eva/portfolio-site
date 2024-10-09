@@ -11,7 +11,9 @@ I'm David, a passionate Salesforce Professional, Software Developer and Tech Lea
 As a Salesforce-certified professional and a software developer, I strive to deliver robust, scalable, and efficient solutions.
 
 ## Key Features
-Responsive Design: Optimized for all devices and screen sizes.
-Dynamic Content: Showcases my certifications, skills, and projects.
-Interactive Navigation: Easily explore various sections of my portfolio.
-Social Media Integration: Connect with me via GitHub, LinkedIn, and Trailblazer.
+<ul>
+  <li>Responsive Design: Optimized for all devices and screen sizes.</li>
+  <li>Dynamic Content: Showcases my certifications, skills, and projects.</li>
+  <li>Interactive Navigation: Easily explore various sections of my portfolio.</li>
+  <li>Social Media Integration: Connect with me via GitHub, LinkedIn, and Trailblazer.</li>
+</ul>
