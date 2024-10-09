@@ -7,8 +7,11 @@ Welcome to my personal portfolio website! This site showcases my work as a Softw
 - [Key Features](#Key-Features)
 
 ## Introduction
-I'm David, a passionate Salesforce Professional, Software Developer and Tech Lead. This portfolio website highlights my journey, skillset, and the various technologies I have mastered.
-As a Salesforce-certified professional and a software developer, I strive to deliver robust, scalable, and efficient solutions.
+<ul>
+  <li>I'm David, a passionate Salesforce Professional, Software Developer and Tech Lead. This portfolio website highlights my journey, skillset, and the various technologies I have mastered.
+      As a Salesforce-certified professional and a software developer, I strive to deliver robust, scalable, and efficient solutions.
+  </li>
+</ul>
 
 ## Key Features
 <ul>
