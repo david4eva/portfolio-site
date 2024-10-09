@@ -1,0 +1,444 @@
+:root {
+    --main--font: "Poppins";
+    --main--font-size: 17px;
+    --bg--color: #b4c9ed;
+    --banner--color: #343a40;
+}
+
+* {
+    box-sizing: border-box !important;
+}
+
+/* Sections */
+.section {
+    display: flex;
+    justify-content: center;
+    font-family: var(--main--font), serif;
+}
+
+.section-title {
+    font-size: 2em;
+    font-weight: 600;
+    padding-right: 10px;
+}
+
+.section-accent {
+    vertical-align: super;
+}
+
+.section-content, .cert-content {
+    font-size: var(--main--font-size);
+}
+
+/* Set max-width for all sections */
+.row {
+    max-width: 1504px;
+}
+
+/* Navbar */
+a.navbar-brand {
+    font-family: "Style Script", cursive;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 700;
+    margin-right: 0;
+    padding-bottom: 0;
+}
+
+a.nav-link {
+    font-family: var(--main--font), serif;
+    font-size: var(--main--font-size);
+    font-weight: 500;
+}
+
+/* Default: Show regular menu, hide hamburger menu */
+.regular-menu {
+    display: flex;
+    gap: 15px;
+}
+
+.navbar-toggler, .navbar-popup-menu {
+    display: none;
+}
+
+/* Media query: Show hamburger menu and hide regular menu when screen is <= 900px */
+@media (max-width: 900px) {
+    .regular-menu {
+        display: none;
+    }
+
+    .navbar-toggler {
+        display: inline-block;
+    }
+
+    .navbar-popup-menu {
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        right: 20px;
+        background-color: #000;
+        border-radius: 5px;
+        padding: 10px;
+        display: none;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar-popup-menu.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header & footer */
+nav.navbar, footer {
+    background-color: rgba(32, 50, 66, 1);
+}
+
+/* Intro Section */
+.intro-section {
+    background-color: var(--bg--color);
+    padding-top: 100px;
+    padding-bottom: 50px;
+
+}
+
+body > div > section.section.intro-section > div {
+    padding-top: 30px;
+}
+
+.intro-row {
+    width: 1504px;
+}
+
+.intro-left-col {
+    font-size: 40px;
+    font-family: var(--main--font), serif;
+    padding-top: 40px;
+}
+
+a i {
+    color: #54515c;
+}
+
+.social-icons {
+    padding: 0 15px 0 15px;
+    font-size: 50px;
+    animation: popOut 1s ease forwards, bounce 3s ease infinite 1s;
+}
+
+.icon {
+    font-size: 50px;
+    display: inline-block;
+    animation: popOut 1s ease forwards, bounce 1s ease infinite 1s;
+}
+
+/* Pop out effect */
+@keyframes popOut {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* About Section */
+.about-img {
+    width: 500px;
+}
+
+.about-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.about-heading-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.section-accent {
+    border: black solid 1px;
+    width: 100px;
+}
+
+/* Skills Section */
+.skills-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: var(--bg--color);
+    /*height: 500px;*/
+}
+
+.skills-img {
+    width: 500px;
+}
+
+ul {
+    list-style-type: square;
+}
+
+/* Certifications Section */
+#slide {
+    padding-top: 60px;
+}
+
+#carouselExampleAutoplaying > div, #carouselExampleAutoplaying { /* Class --> carousel-inner */
+    width: 400px;
+}
+
+.certs-row {
+    width: 1504px;
+}
+
+.carousel .slide {
+    width: 500px;
+}
+
+.certs-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.cert-content {
+    font-style: italic;
+}
+
+/* Footer */
+section, div.banner-container, footer {
+    padding: 0 112px 0 112px;
+}
+
+.footer {
+    height: 90px;
+    font-family: var(--main--font), serif;
+    font-weight: 600;
+}
+
+/* Media Queries */
+@media(prefers-reduced-motion: no-preference) {
+    * {
+        scroll-behavior: smooth;
+    }
+}
+
+@media (max-width: 1500px) {
+    .row {
+        /*width: 1270px;*/
+    }
+
+    .salesforce-cert {
+        width: 150px;
+    }
+}
+
+@media (max-width: 1300px) {
+    .skills-img, .about-img {
+        width: 400px;
+    }
+}
+
+@media (max-width: 1250px) {
+    .salesforce-cert {
+        width: 140px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .salesforce-cert {
+        width: 130px;
+    }
+}
+
+@media (max-width: 1100px) {
+    .salesforce-cert {
+        width: 120px;
+    }
+
+    .avatar-img {
+        width: 230px;
+    }
+
+    .intro-left-col {
+        font-size: 36px;
+    }
+
+    .skills-img, .about-img {
+        width: 380px;
+    }
+}
+
+@media (max-width: 1070px) {
+    .skills-img, .about-img, #carouselExampleAutoplaying > div, #carouselExampleAutoplaying { /* Class --> carousel-inner */
+        width: 360px;
+    }
+
+    #carouselExampleAutoplaying > div, #carouselExampleAutoplaying { /* Class --> carousel-inner */
+        /*width: 400px;*/
+    }
+
+    .social-icons {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 1030px) {
+    .skills-img, .about-img, #carouselExampleAutoplaying > div, #carouselExampleAutoplaying {
+        width: 340px;
+    }
+
+    .avatar-img {
+        width: 220px;
+    }
+
+    .salesforce-cert {
+        width: 110px;
+    }
+}
+
+@media (max-width: 980px) {
+    .skills-img, .about-img, #carouselExampleAutoplaying > div, #carouselExampleAutoplaying {
+        width: 330px;
+    }
+
+    .avatar-img {
+        width: 220px;
+    }
+
+    .salesforce-cert {
+        width: 110px;
+    }
+
+    .section-title {
+        font-size: 1.5em;
+    }
+
+    .sub-title {
+        font-size: 1.1rem;
+    }
+
+    .col-6.intro-left-col {
+        font-size: 30px;
+    }
+
+    body > div > section.section.intro-section > div > div.col-6.text-end > img {
+        height: 220px;
+    }
+
+    .social-icons {
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 950px) {
+    .cert-bottom-col, .cert-top-col {
+        padding-top: 0;
+        padding-bottom: 60px;
+    }
+
+    .salesforce-cert {
+        width: 150px;
+    }
+
+    .skills-img, .about-img {
+        width: 300px;
+    }
+}
+
+@media (max-width: 900px) {
+    .skills-img, .about-img, #carouselExampleAutoplaying > div, #carouselExampleAutoplaying {
+        width: 250px;
+    }
+
+    body > div > section.section.intro-section > div, #about-section > div {
+        display: block;
+    }
+
+    .intro-left-col {
+        text-align: center;
+    }
+
+    .intro-right-col {
+        text-align: center;
+    }
+
+    .about-section-left-col {
+        display: none;
+    }
+
+    .cert-left-col {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 30px;
+    }
+
+    .skills-col-img {
+        text-align: center;
+        padding-top: 30px;
+    }
+
+    .regular-menu {
+        display: none;
+    }
+
+    .navbar-toggler {
+        display: inline-block;
+    }
+
+    /* Pop-up menu adjustments */
+    .navbar-popup-menu {
+        position: absolute;
+        top: 60px; /* Adjust based on navbar height */
+        right: 10px;
+        background-color: #000;
+        border-radius: 8px;
+        padding: 20px; /* Increase padding to make the pop-up larger */
+        display: none;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+        width: 200px; /* Increase width */
+    }
+
+    .navbar-popup-menu.show {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Spacing between menu items */
+    .navbar-popup-menu a {
+        display: block;
+        margin: 15px 0; /* More spacing between items */
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+    }
+}
+
+@media (max-width: 850px) {
+    .skills-img, .about-img, #carouselExampleAutoplaying > div, #carouselExampleAutoplaying {
+        width: 220px;
+    }
+
+    .section-content {
+        font-size: 15px;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .sub-title {
+        font-size: 1rem;
+    }
+
+    .section-accent {
+        width: 70px;
+    }
+}
