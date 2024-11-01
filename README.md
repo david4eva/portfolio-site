@@ -1,6 +1,6 @@
 # Portfolio Website
 
-Welcome to my personal portfolio website! This site showcases my work as a Software Developer and Tech Lead, with a focus on various projects, skills, and certifications. You can explore my achievements, technologies I work with, and get in touch via GitHub or LinkedIn. You can view the site here [David Elias](https://davidelias.netlify.app/)
+Welcome to my personal portfolio website! This site showcases my work as a Software Developer and Tech Lead, with a focus on various projects, skills, and certifications. You can explore my achievements, technologies I work with, and get in touch via GitHub or LinkedIn. You can view the site here [https://davidelias.netlify.app](https://davidelias.netlify.app)
 
 ## Table of Contents
 - [Introduction](#Introduction)
