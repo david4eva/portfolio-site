@@ -1,54 +1,199 @@
-// Cache DOM elements to avoid repeated queries
-const introLeftCol = document.querySelector('.intro-left-col');
-const introRightCol = document.querySelector('.intro-right-col');
-const aboutLeftCol = document.querySelector('.about-section-left-col');
-const aboutRightCol = document.querySelector('.about-section-right-col');
-const certLeftCol = document.querySelector('.cert-left-col');
-const certRightCol = document.querySelector('.cert-right-col');
-const skillsColContent = document.querySelector('.skills-col-content');
-const skillsColImg = document.querySelector('.skills-col-img');
+/**
+ * Portfolio page interactions
+ * Handles responsive behavior and UI interactions
+ */
+(function () {
+    'use strict';
 
-// Handle media query change for 900px
-function handleMediaChange900px(e) {
-    const isMobile = e.matches;
+    // Constants
+    const BREAKPOINTS = {
+        MOBILE: 900
+    };
 
-    // Intro Section changes
-    introLeftCol.classList.toggle('col-6', !isMobile);
-    introLeftCol.classList.toggle('col-12', isMobile);
-    introRightCol.classList.toggle('col-6', !isMobile);
-    introRightCol.classList.toggle('text-end', !isMobile);
-    introRightCol.classList.toggle('col-12', isMobile);
+    const SELECTORS = {
+        introLeftCol: '.intro-left-col',
+        introRightCol: '.intro-right-col',
+        aboutLeftCol: '.about-section-left-col',
+        aboutRightCol: '.about-section-right-col',
+        certLeftCol: '.cert-left-col',
+        certRightCol: '.cert-right-col',
+        skillsColContent: '.skills-col-content',
+        skillsColImg: '.skills-col-img',
+        menuToggler: '#menuToggler',
+        navbarMenu: '#navbarMenu',
+        copyrightYear: '#copyright-year'
+    };
 
-    // Cert Section changes
-    certLeftCol.classList.toggle('col-6', !isMobile);
-    certLeftCol.classList.toggle('col-12', isMobile);
-    certRightCol.classList.toggle('col-6', !isMobile);
-    certRightCol.classList.toggle('col-12', isMobile);
-    skillsColContent.classList.toggle('col-6', !isMobile);
-    skillsColContent.classList.toggle('col-12', isMobile);
-    skillsColImg.classList.toggle('col-6', !isMobile);
-    skillsColImg.classList.toggle('text-end', !isMobile);
-    skillsColImg.classList.toggle('col-12', isMobile);
+    // State
+    let mediaQueryList = null;
 
-    // About Section changes
-    aboutLeftCol.classList.toggle('col-6', !isMobile);
-    aboutRightCol.classList.toggle('col-6', !isMobile);
-    aboutLeftCol.classList.toggle('col-12', isMobile);
-    aboutRightCol.classList.toggle('col-12', isMobile);
-}
+    /**
+     * Safely query and cache DOM elements
+     * @returns {Object} Cached DOM elements
+     */
+    function cacheDOMElements() {
+        const elements = {};
+        
+        Object.entries(SELECTORS).forEach(([key, selector]) => {
+            const element = document.querySelector(selector);
+            if (element) {
+                elements[key] = element;
+            } else {
+                console.warn(`Element not found: ${selector}`);
+            }
+        });
 
-// Set up media query and add event listeners
-const mQuery_900px = window.matchMedia('(max-width: 900px)');
-mQuery_900px.addEventListener('change', handleMediaChange900px);
-handleMediaChange900px(mQuery_900px); // Initial check
+        return elements;
+    }
 
-// Toggling the navbar menu visibility
-document.getElementById('menuToggler').addEventListener('click', function () {
-    const menu = document.getElementById('navbarMenu');
-    menu.classList.toggle('show');
-});
+    /**
+     * Toggle responsive classes for a column
+     * @param {HTMLElement} element - The element to toggle classes on
+     * @param {boolean} isMobile - Whether mobile layout should be applied
+     * @param {boolean} hasTextEnd - Whether element has text-end class
+     */
+    function toggleColumnClasses(element, isMobile, hasTextEnd = false) {
+        if (!element) return;
 
-// Dynamically set the current year in the footer copyright
-const thisYear = new Date().getFullYear().toString();
-const copyrightYear = document.getElementById('copyright-year');
-if (copyrightYear) copyrightYear.innerText = thisYear;
+        // Batch DOM updates
+        element.classList.toggle('col-6', !isMobile);
+        element.classList.toggle('col-12', isMobile);
+        
+        if (hasTextEnd) {
+            element.classList.toggle('text-end', !isMobile);
+        }
+    }
+
+    /**
+     * Handle responsive layout changes
+     * @param {MediaQueryListEvent|MediaQueryList} e - Media query event
+     */
+    function handleResponsiveLayout(e) {
+        const isMobile = e.matches;
+        const elements = window.portfolioElements;
+
+        if (!elements) return;
+
+        // Use requestAnimationFrame to batch DOM changes
+        requestAnimationFrame(() => {
+            // Intro Section
+            toggleColumnClasses(elements.introLeftCol, isMobile);
+            toggleColumnClasses(elements.introRightCol, isMobile, true);
+
+            // About Section
+            toggleColumnClasses(elements.aboutLeftCol, isMobile);
+            toggleColumnClasses(elements.aboutRightCol, isMobile);
+
+            // Certifications Section
+            toggleColumnClasses(elements.certLeftCol, isMobile);
+            toggleColumnClasses(elements.certRightCol, isMobile);
+
+            // Skills Section
+            toggleColumnClasses(elements.skillsColContent, isMobile);
+            toggleColumnClasses(elements.skillsColImg, isMobile, true);
+        });
+    }
+
+    /**
+     * Initialize mobile menu toggle
+     */
+    function initMobileMenu() {
+        const menuToggler = document.querySelector(SELECTORS.menuToggler);
+        const navbarMenu = document.querySelector(SELECTORS.navbarMenu);
+
+        if (!menuToggler || !navbarMenu) {
+            console.warn('Mobile menu elements not found');
+            return;
+        }
+
+        menuToggler.addEventListener('click', () => {
+            const isExpanded = navbarMenu.classList.toggle('show');
+            
+            // Update ARIA for accessibility
+            menuToggler.setAttribute('aria-expanded', isExpanded);
+            
+            // Trap focus if menu is open
+            if (isExpanded) {
+                navbarMenu.focus();
+            }
+        });
+
+        // Close menu on outside click
+        document.addEventListener('click', (e) => {
+            if (!menuToggler.contains(e.target) && !navbarMenu.contains(e.target)) {
+                navbarMenu.classList.remove('show');
+                menuToggler.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navbarMenu.classList.contains('show')) {
+                navbarMenu.classList.remove('show');
+                menuToggler.setAttribute('aria-expanded', 'false');
+                menuToggler.focus();
+            }
+        });
+    }
+
+    /**
+     * Initialize responsive layout handler
+     */
+    function initResponsiveLayout() {
+        mediaQueryList = window.matchMedia(`(max-width: ${BREAKPOINTS.MOBILE}px)`);
+        
+        // Modern API (with fallback for older browsers)
+        if (mediaQueryList.addEventListener) {
+            mediaQueryList.addEventListener('change', handleResponsiveLayout);
+        } else {
+            // Fallback for older browsers
+            mediaQueryList.addListener(handleResponsiveLayout);
+        }
+
+        // Initial check
+        handleResponsiveLayout(mediaQueryList);
+    }
+
+    /**
+     * Set copyright year
+     */
+    function initCopyright() {
+        const copyrightElement = document.querySelector(SELECTORS.copyrightYear);
+        
+        if (copyrightElement) {
+            const currentYear = new Date().getFullYear();
+            copyrightElement.textContent = currentYear;
+        }
+    }
+
+    /**
+     * Cleanup function (useful for SPAs)
+     */
+    function cleanup() {
+        if (mediaQueryList) {
+            if (mediaQueryList.removeEventListener) {
+                mediaQueryList.removeEventListener('change', handleResponsiveLayout);
+            } else {
+                mediaQueryList.removeListener(handleResponsiveLayout);
+            }
+        }
+    }
+
+    /**
+     * Initialize all portfolio interactions
+     */
+    function init() {
+        try {
+            // Cache elements globally (for access in other functions)
+            window.portfolioElements = cacheDOMElements();
+
+            // Initialize features
+            initResponsiveLayout();
+            initMobileMenu();
+            initCopyright();
+
+            // Store cleanup function for potential later use
+            window.portfolioCleanup = cleanup;
+
+        } catch (error) {
+            console.error('Error initializing p
