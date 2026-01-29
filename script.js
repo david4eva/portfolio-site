@@ -197,3 +197,19 @@
 
         } catch (error) {
             console.error('Error initializing p
+
+    function initCopyright() {
+    const copyrightElement = document.querySelector(SELECTORS.copyrightYear);
+
+    if (copyrightElement) {
+        const currentYear = new Date().getFullYear();
+        const startYear = 2019; // Your website start year
+
+        if (currentYear > startYear) {
+            copyrightElement.textContent = currentYear;
+        } else {
+            // If somehow current year is same as start year, just show single year
+            copyrightElement.textContent = startYear;
+        }
+    }
+}                          
